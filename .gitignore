@@ -1,6 +1,5 @@
 *.class
-
-# Package Files #
+*.nxj
 *.jar
-*.war
-*.ear
+/nxt/Data.java
+/nxt/Dangler.nxd
