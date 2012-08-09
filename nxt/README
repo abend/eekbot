@@ -1,0 +1,4 @@
+This is the control software for the Lego Mindstorms NXT bots.
+It uses leJOS (http://lejos.sourceforge.net/), and so requires
+the leJOS dev kit to be installed locally to compile against,
+and the leJOS OS running on the NXT brick to run.
