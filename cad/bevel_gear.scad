@@ -29,7 +29,7 @@ module my_bevel_gear_pair (
                                     face_width=10,
                                     bore_diameter=0,
                                     outside_circular_pitch=outside_circular_pitch);
-                        translate([0,0,-10]) axle(5);
+                        scale([1.1,1.1,1]) translate([0,0,-10]) axle(5);
                 }
 	}
         translate([60,0,0])
