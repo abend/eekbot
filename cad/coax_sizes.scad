@@ -17,7 +17,7 @@ nut_width = 9.8;
 
 legs = 3;
 leg_hole_r = 2.5;
-leg_r = 2.25;
+leg_r = 2.15;
 leg_h = 15;
 leg_offset = 12;
 
