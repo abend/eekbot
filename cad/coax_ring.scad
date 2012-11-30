@@ -20,7 +20,6 @@ module coax_ring () {
                         #cube([nut_width, nut_depth, rod_up_from_base * 4], true);
 
                 // axle hole
-                //translate([width/5, 0, 0]) rotate([0, 0, 0]) 
                 translate([ring_body_w + .5, 0, 0])
                         rotate([90, 0, 0])
                         #cylinder(r=rod_r, h=20, center=true, $fn=60);

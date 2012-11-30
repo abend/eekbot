@@ -16,7 +16,8 @@ nut_depth = 3.5;
 nut_width = 9.8;
 
 legs = 3;
-leg_r = 2.5;
+leg_hole_r = 2.5;
+leg_r = 2.25;
 leg_h = 15;
 leg_offset = 12;
 
@@ -25,5 +26,5 @@ nub_r = 1.25;
 
 ring_h = 13;
 
-rod_r = 2.7;
+rod_r = 2.9;
 rod_up_from_base = 5;

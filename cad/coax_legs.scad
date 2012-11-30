@@ -23,7 +23,7 @@ module coax_leg() {
 
 module coax_legs () {
         union() {
-                for(i = [1 : 1]) {
+                for(i = [1 : legs]) {
                         translate([0, 10 * i - (legs / 1.5) * 10, 0]) coax_leg();
                 }
         }

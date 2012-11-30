@@ -27,7 +27,7 @@ module coax_center () {
                 for(i = [1 : legs]) {
                         rotate([0, 0, i * 360 / legs])
                                 translate([leg_offset, 0, 0])
-                                	cylinder(h = 100, r = leg_r, center = true, $fn=3);
+                                	cylinder(h = 100, r = leg_hole_r, center = true, $fn=3);
 
                 }
         }
