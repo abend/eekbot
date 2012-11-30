@@ -1,5 +1,7 @@
 *.class
 *.nxj
 *.jar
+*.stl
+*.gcode
 /nxt/Data.java
 /nxt/Dangler.nxd
