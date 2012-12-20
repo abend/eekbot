@@ -1,5 +1,18 @@
 include <coax_sizes.scad>
 
+module nubs() {
+        for (i = [1 : nubs]) {
+                rotate([0, 0, i * 360 / nubs])
+                        translate([ctr_bottom_r + 2.5, 0, ctr_bottom_h / 2])
+                        scale([1, 2, 1])
+                        cylinder(h = ctr_bottom_h, r = nub_r, center = true, $fn=30);
+                rotate([0, 0, i * 360 / nubs])
+                        translate([ctr_bottom_r + 1, 0, ctr_bottom_h / 2])
+                        scale([2, 1, 1])
+                        cylinder(h = ctr_bottom_h, r = nub_r, center = true, $fn=30);
+        }
+}
+
 module coax_center () {
         difference() {
                 union() {
@@ -7,18 +20,7 @@ module coax_center () {
                         // bottom
                         translate([0,0,ctr_bottom_h / 2]) cylinder(h = ctr_bottom_h, r = ctr_bottom_r, center = true, $fn=120);
                         // rubber band attachments
-                        for (i = [1 : nubs]) {
-                                rotate([0, 0, i * 360 / nubs])
-                                        translate([ctr_bottom_r + 2.5, 0, ctr_bottom_h / 2])
-                                        scale([1, 2, 1])
-                                        cylinder(h = ctr_bottom_h, r = nub_r, center = true, $fn=30);
-                                rotate([0, 0, i * 360 / nubs])
-                                        translate([ctr_bottom_r + 1, 0, ctr_bottom_h / 2])
-                                        scale([2, 1, 1])
-                                	#cylinder(h = ctr_bottom_h, r = nub_r, center = true, $fn=30);
-
-                        }
-
+                        nubs();
                 }
                 // center hole
                 cylinder(h = ring_h * 10, r = pen_hole_r, center = true, $fn=120);
