@@ -3,5 +3,9 @@
 *.jar
 *.stl
 *.gcode
+*.old
+*.nxd
+*.nxj
+.emacs.desktop
+.emacs.desktop.lock
 /nxt/Data.java
-/nxt/Dangler.nxd
