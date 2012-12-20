@@ -20,13 +20,13 @@ public class Floorbot {
         static boolean penDown = true;
 
 
-
         public static void main(String[] args) {
+                //RConsole.open(15000);
                 //RConsole.openUSB(15000);
                 //RConsole.openBluetooth(1000);
 
                 //int[] pos = Data.data;
-                int[] pos = square();
+                int[] pos = PresetShapes.square();
 
                 int total = pos.length / 3;
 
@@ -41,93 +41,14 @@ public class Floorbot {
                         if (!go(x, y)) break;
                         i = i + 3;
                 }
-                //Button.waitForPress();
+                LCD.drawString("Done!", 0, 3);
+                //Button.waitForAnyPress(15000);
+                //RConsole.close();
+                //LCD.drawString("All Done!", 0, 3);
+                Sound.playTone(500, 150);
+                Sound.playTone(1000, 150);
+                Sound.playTone(2000, 5000);
         }
-
-
-        static int[] lines() {
-                return new int[] {
-                        0, -10, -10,
-                        1, -10,  10,
-                        1,  10,  10,
-                        1,  10, -10,
-                        0,  0,  0,
-                };
-        }
-
-        static int[] grid() {
-                int size = 5;
-                int step = 2;
-
-                return new int[] {
-                        0, -6, -6,
-                        1, -6, -6,
-                        0, -4, -6,
-                        1, -4, -6,
-                        0, -2, -6,
-                        1, -2, -6,
-                        0, -0, -6,
-                        1, -0, -6,
-
-                        0, -6, -0,
-                        1, -6, -0,
-                        0, -4, -0,
-                        1, -4, -0,
-                        0, -2, -0,
-                        1, -2, -0,
-                        0, -0, -0,
-                        1, -0, -0,
-
-                        0,  6,  6,
-                        1,  6,  6,
-                        0,  4,  6,
-                        1,  4,  6,
-                        0,  2,  6,
-                        1,  2,  6,
-                        0,  0,  6,
-                        1,  0,  6,
-
-                        0,  0,  0,
-                        1,  0,  0
-                };
-                        /*
-                for (int x = -size; x <= size; x += step) {
-                        for (int y = -size; y <= size; y += step) {
-                                pos[x*3 + y*x + 0] = 0;
-                                pos[x*3 + y*x + 1] = x;
-                                pos[x*3 + y*x + 2] = y;
-                        }
-                }
-                        */
-        }
-
-        static int[] square() {
-                return new int[] {
-                        1, 0, 10,
-                        1, 10, 10,
-                        1, 10, 0,
-                        1, 0, 0 };
-        }
-
-        static int[] star() {
-                return new int[] {
-                        0, 0, -7, // top
-                        1, -5,  0,
-                        1, -15, 0, // left
-                        1, -7,  4,
-                        1, -9,  10, // l bot
-                        1, 0, 5,
-                        1, 9, 10, // r bot
-                        1, 7, 4,
-                        1, 15, 0,  // right
-                        1, 5, 0,
-                        1, 0, -10,
-                        0, 0, 0,
-                        1, 0, 0
-                };
-        }
-
-
 
         static boolean go(int px, int py) {
                 px += START_X;
@@ -194,8 +115,6 @@ public class Floorbot {
 
                 curX = px;
                 curY = py;
-
-                //Sound.playTone(500, 150);
 
                 return keep;
         }
