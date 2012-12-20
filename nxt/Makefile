@@ -1,19 +1,36 @@
+DEFAULT=Floorbot
 
-all: compile run
+# USB: -u
+# Bluetooth: -b
+CONNECT_FLAG=-u
 
-debug: compile-debug run-debug
+all: run
 
-compile:
-	nxjc Dangler.java
+debug: $(DEFAULT)-debug.nxj
 
-run:
-	nxj -r Dangler
+run: $(DEFAULT).nxj
+	nxj -r $(CONNECT_FLAG) $(DEFAULT)
 
-compile-debug:
-	nxjc Dangler.java
-	nxjlink -gr -o Dangler.nxj -od Dangler.nxd Dangler
-
-run-debug:
-	nxjupload -r Dangler.nxj
+run-debug: $(DEFAULT).nxd
+	nxjupload -r $(CONNECT_FLAG) $(DEFAULT)-debug.nxj
 	sleep 5
-	nxjconsole -di Dangler.nxd
+	nxjconsole $(CONNECT_FLAG) -di $(DEFAULT)-debug.nxd
+
+clean:
+	rm *.nxj *.nxd *.class
+
+
+Floorbot.class: Data.class
+
+
+%.class: %.java
+	@echo compiling $@
+	@nxjc $<
+
+%.nxj: %.class
+	@echo linking $@
+	@nxjlink -o $*.nxj $*
+
+%.nxd: %.class
+	@echo debug linking $@
+	@nxjlink -gr -o $*-debug.nxj -od $*-debug.nxd $*
