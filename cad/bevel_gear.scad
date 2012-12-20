@@ -2,10 +2,10 @@ include <MCAD/involute_gears.scad>
 include <MCAD/lego_compatibility.scad>
 
 module my_bevel_gear_pair (
-	gear1_teeth = 40,
-	gear2_teeth = 10,
+	gear1_teeth = 20,
+	gear2_teeth = 20,
 	axis_angle = 90,
-	outside_circular_pitch=400)
+	outside_circular_pitch=300)
 {
 	outside_pitch_radius1 = gear1_teeth * outside_circular_pitch / 360;
 	outside_pitch_radius2 = gear2_teeth * outside_circular_pitch / 360;
@@ -19,8 +19,8 @@ module my_bevel_gear_pair (
 	echo ("pitch_angle1, pitch_angle2", pitch_angle1, pitch_angle2);
 	echo ("pitch_angle1 + pitch_angle2", pitch_angle1 + pitch_angle2);
 
-        translate([0,0,+pitch_apex1 /1.5]) {
-                difference() {
+        difference() {
+                union() {
                         bevel_gear (
                                     number_of_teeth=gear1_teeth,
                                     cone_distance=cone_distance,
@@ -29,12 +29,18 @@ module my_bevel_gear_pair (
                                     face_width=10,
                                     bore_diameter=0,
                                     outside_circular_pitch=outside_circular_pitch);
-                        scale([1.1,1.1,1]) translate([0,0,-10]) axle(5);
+                        // fill the middle
+                        translate([0,0,0]) cylinder(h = 11, r = 10, center = true, $fa=60);
                 }
-	}
-        translate([60,0,0])
+                // trim some off the top - problematic to print
+                translate([0,0,11]) cylinder(h = 12, r = 20, center = true, $fa=60);
+                // axle
+                scale([1.1,1.1,1]) translate([0,0,-10]) axle(5);
+        }
+
+        translate([40,0,0]) //rotate([180,0,0])
                 difference() {
-		bevel_gear (
+                bevel_gear (
                             number_of_teeth=gear2_teeth,
                             cone_distance=cone_distance,
                             pressure_angle=30,
@@ -42,8 +48,15 @@ module my_bevel_gear_pair (
                             bore_diameter=0,
                             gear_thickness = 5,
                             outside_circular_pitch=outside_circular_pitch);
-                        translate([0,0,-10]) axle(5);
+                // trim some off the top - problematic to print
+                translate([0,0,11]) cylinder(h = 12, r = 20, center = true, $fa=60);
+                // nut hole
+                cylinder(h = 40, r = 5/2, center = true, $fs=1);
+                // rod hole
+                translate([0,0,10]) {
+                        cylinder(h = 24, r = 11.2/2, center = true, $fa=60);
                 }
+        }
 }
 
 my_bevel_gear_pair();
