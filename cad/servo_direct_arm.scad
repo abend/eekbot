@@ -23,7 +23,7 @@ module servo_direct_arm() {
                 // rod hole
                 cylinder(h = 40, r = 5/2, center = true, $fn=50);
                 // nut hole
-                translate([0,0,-1.5]) {
+                translate([0,0,-1]) {
                         #cylinder(h = h, r = 11.2/2, center = false, $fa=60);
                 }
 
