@@ -16,10 +16,12 @@ nut_depth = 3.5;
 nut_width = 9.8;
 
 legs = 3;
-leg_hole_r = 2.5;
+leg_hole_r = 2.6;
 leg_r = 2.15;
 leg_h = 15;
-leg_offset = 12;
+leg_w = 5;
+leg_offset = 60;
+foot_offset = 65.5;
 
 nubs = 2;
 nub_r = 1.25;

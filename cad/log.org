@@ -22,3 +22,16 @@
 ** servo direct arm 2
 - orange PLA @ 1.82
 - 30 / .25 / 1 / 60 / 80 / 210 (80)
+
+
+* 20 dec 12
+
+** coax center
+- orange PLA @ 1.82
+- 20 / .3 (try .25) / 0 / 80 / 120 / 210 (80)
+good
+
+** coax legs
+- orange PLA @ 1.82
+- 20 / .25 / 0 / 60 / 80 / 210 (80)
+good
