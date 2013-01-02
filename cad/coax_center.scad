@@ -16,7 +16,7 @@ module nubs() {
 module coax_center () {
         difference() {
                 union() {
-                        #translate([0,0,ring_h * 1.5 - 4]) cylinder(h = ring_h * 3 - 8, r = ctr_outside_r, center = true, $fn=120);
+                        translate([0,0,ring_h * 1.5 - 4]) cylinder(h = ring_h * 3 - 8, r = ctr_outside_r, center = true, $fn=120);
                         // bottom
                         translate([0,0,ctr_bottom_h / 2]) cylinder(h = ctr_bottom_h, r = ctr_bottom_r, center = true, $fn=120);
                         // rubber band attachments
@@ -29,11 +29,12 @@ module coax_center () {
                                                 union() {
                                                         cube([leg_offset, leg_w, ctr_bottom_h], true);
                                                         // round the ends
-                                                        translate([leg_offset / 2 - leg_w * .5, 0, 0]) { 
-                                                                //difference() {
-                                                                //translate([5, 0, 0]) cube([leg_w, leg_w * 1.1, ctr_bottom_h * 2], true);
-                                                                cylinder(h = ctr_bottom_h, r = leg_w * 1, center = true, $fn = 60);
-                                                                //}
+                                                        translate([leg_offset / 2 - leg_w * .5 + 2, 0, 0]) { 
+                                                                cylinder(h = ctr_bottom_h, r = leg_round_r, center = true, $fn = 60);
+                                                        }
+                                                        // round the inside
+                                                        translate([-leg_offset / 2 + leg_w, 0, 0]) { 
+                                                                cylinder(h = ctr_bottom_h, r = leg_round_r, center = true, $fn = 60);
                                                         }
                                                 }
                                         }

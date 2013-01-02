@@ -29,9 +29,17 @@
 ** coax center
 - orange PLA @ 1.82
 - 20 / .3 (try .25) / 0 / 80 / 120 / 210 (80)
-good
+good, but broke when stepped on where leg attaches to center
 
 ** coax legs
 - orange PLA @ 1.82
 - 20 / .25 / 0 / 60 / 80 / 210 (80)
+good
+
+
+* 2 jan 12
+
+** coax center
+- trans blue PLA @ 1.82
+- 30 / .25 / 1 / 90 / 140 / 195 (80)
 good
