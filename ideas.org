@@ -1,0 +1,3 @@
+use ink/paper that bleeds more.  use pauses to bleed various sized dots.
+
+use small roll-on deodorant with ink.
