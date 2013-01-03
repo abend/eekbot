@@ -24,6 +24,21 @@ public class Floorbot {
                 //RConsole.openUSB(15000);
                 //RConsole.openBluetooth(1000);
 
+                manualHome();
+
+                Button.ESCAPE.waitForPress();
+        }
+
+        static void manualHome() {
+                HomingButtonListener hbl = new HomingButtonListener(Motor.A, Motor.B);
+        }
+
+        public static void homingFinished () {
+                Sound.twoBeeps();
+                draw();
+        }
+
+        static void draw() {
                 int[] pos = Data.data;
                 //int[] pos = PresetShapes.star();
 
@@ -45,7 +60,9 @@ public class Floorbot {
                 //RConsole.close();
                 //LCD.drawString("All Done!", 0, 3);
                 Sound.playTone(1000, 250);
+                Sound.pause(250);
                 Sound.playTone(2000, 250);
+                Sound.pause(250);
                 Sound.playTone(4000, 500);
         }
 
