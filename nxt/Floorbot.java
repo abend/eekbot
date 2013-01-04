@@ -7,16 +7,16 @@ import java.util.*;
  */
 public class Floorbot {
         /** Span between the center of the base points of the triangle. */
-        static final int WIDTH = 450; // mm
+        static final int WIDTH = 600; // mm
         static final int OFF_X = WIDTH / 2;
         /** Distance from center of base to drawing tip when tip is at logical 0,0. */
-        static final int OFF_Y = 540;
+        static final int OFF_Y = 500;
         static final double MM_REV = 1; // mm per revolution
         static final int START_X = 0;
         static final int START_Y = START_X;
         static int curX = START_X;
         static int curY = START_Y;
-        static final int scale = 2;
+        static boolean penDown = false;
 
 
         public static void main(String[] args) {
@@ -40,22 +40,27 @@ public class Floorbot {
 
         static void draw() {
                 int[] pos = Data.data;
-                //int[] pos = PresetShapes.star();
+                //int[] pos = PresetShapes.grid();
+                int scale = 1;
 
                 int total = pos.length / 3;
 
                 for (int i = 0; i < pos.length;) {
-                        //int pen = pos[i];
+                        int pen = pos[i];
                         int x = pos[i+1] * scale;
                         int y = pos[i+2] * scale;
 
+                        if (pen < 1) penUp(); else penDown();
+
                         int step = (int)(i / 3);
-                        RConsole.println(step + "/" + total + ": going to " + x + "," + y);
+                        //RConsole.println(step + "/" + total + ": going to " + x + "," + y);
+                        LCD.clear();
                         LCD.drawString(step + "/" + total, 0, 3);
                         if (!go(x, y)) break;
                         i = i + 3;
                 }
-                LCD.drawString("Done!", 0, 3);
+                LCD.clear();
+                LCD.drawString("Done!", 0, 0);
                 //Button.waitForAnyPress(15000);
                 //RConsole.close();
                 //LCD.drawString("All Done!", 0, 3);
@@ -115,7 +120,7 @@ public class Floorbot {
                 //RConsole.println("  speed: " + spdA + "," + spdB);
                 LCD.drawString("dst: " + diffa + "," + diffb, 0, 4);
                 LCD.drawString("rot: " + da + "," + db, 0, 5);
-                LCD.drawString("spd: " + spdA + "," + spdB, 0, 6);
+                LCD.drawString("spd: " + (int)Math.round(spdA) + "," + (int)Math.round(spdB), 0, 6);
 
                 if (spdA > 0) Motor.A.setSpeed(spdA);
                 if (spdB > 0) Motor.B.setSpeed(spdB);
@@ -157,5 +162,29 @@ public class Floorbot {
 
         static int mmToDegrees(int mm) {
                 return (int)((mm / MM_REV) * 360);
+        }
+
+        static void penUp() {
+                if (!penDown) return;
+
+                LCD.clear();
+                LCD.drawString("Pen up", 0, 5);
+
+                Sound.twoBeeps();
+                try { Thread.sleep(5000); } catch (InterruptedException e) {};
+
+                penDown = false;
+        }
+
+        static void penDown() {
+                if (penDown) return;
+
+                LCD.clear();
+                LCD.drawString("Pen down", 0, 5);
+
+                Sound.twoBeeps();
+                try { Thread.sleep(5000); } catch (InterruptedException e) {};
+
+                penDown = true;
         }
 }

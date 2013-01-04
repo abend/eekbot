@@ -37,6 +37,7 @@ public class HomingButtonListener implements ButtonListener {
                         } else if (currentMotor == motor2) {
                                 // there's no removeButtonListener!
                                 currentMotor = null;
+                                LCD.clear();
                                 LCD.drawString("Homing done.", 0, 1);
                                 Floorbot.homingFinished();
                         }
@@ -56,6 +57,7 @@ public class HomingButtonListener implements ButtonListener {
 
                 String name = m == motor1 ? "A" : "B";
 
+                LCD.clear();
                 LCD.drawString("Homing motor " + name, 0, 1);
         }
 
