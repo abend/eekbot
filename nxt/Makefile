@@ -20,7 +20,7 @@ clean:
 	rm *.nxj *.nxd *.class
 
 
-Floorbot.class: Data.class
+Floorbot.class: Data.class HomingButtonListener.class
 
 
 %.class: %.java
