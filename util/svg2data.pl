@@ -7,7 +7,7 @@ use List::AllUtils qw(max min);
 use FindBin qw($Bin);
 
 #our $MAX_SIZE = 600; # mm =~ 24"
-our $MAX_SIZE = 75;
+our $MAX_SIZE = 300;
 
 my $in = shift @ARGV;
 die "usage: $0 file.svg" unless $in;
@@ -54,8 +54,9 @@ sub scale {
 
   my @newdata;
   for my $line (@data) {
+    # NOTE: inverting y
     push @newdata, [($$line[0] - $ctrx) * $scale,
-                    ($$line[1] - $ctry) * $scale];
+                    -($$line[1] - $ctry) * $scale];
   }
 
   my $minx2 = min(map { $$_[0] } @newdata);
@@ -91,8 +92,10 @@ EOM
 sub write_data {
   my $out = shift;
 
+  my $pen = 0;
   for my $p (@_) {
-    say $out "    ", join(',', map { int($_+.5) } 1, @$p),",";
+    say $out "    ", join(',', map { int($_+.5) } $pen, @$p),",";
+    $pen = 1;
   }
 }
 
